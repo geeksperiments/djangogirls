@@ -1,6 +1,7 @@
-from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Post
 
 
 def home(request):
-
-    return HttpResponse("Hello! My first Django web app!")
+    posts = Post.objects.all().order_by("-created_date")
+    return render(request, "blog/home.html", {"posts": posts})
